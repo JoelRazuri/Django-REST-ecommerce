@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ecommerce_rest.settings.local.py')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ecommerce_rest.settings.local')
 
 application = get_asgi_application()
