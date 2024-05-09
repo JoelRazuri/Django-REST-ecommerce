@@ -17,7 +17,7 @@ from apps.users.models import User
 @api_view(['GET', 'POST'])
 def user_api_view(request):
     if request.method == 'GET':
-        users = User.objects.all()
+        users = User.objects.all().values('id', 'username', 'name', 'last_name', 'email')
         users_serializer = UserSerializer(users, many=True)
         return Response(users_serializer.data, status=status.HTTP_200_OK)
     
