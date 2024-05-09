@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import status
-from apps.users.api.serializers import UserSerializer
+from apps.users.api.serializers import UserSerializer, UserListSerializer
 from apps.users.models import User
 
 # Vista de clase
@@ -18,7 +18,7 @@ from apps.users.models import User
 def user_api_view(request):
     if request.method == 'GET':
         users = User.objects.all().values('id', 'username', 'name', 'last_name', 'email')
-        users_serializer = UserSerializer(users, many=True)
+        users_serializer = UserListSerializer(users, many=True)
         return Response(users_serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'POST':

@@ -7,6 +7,23 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+    def create(self, validated_data):
+        user = User(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+    def update(self, instance, validated_data):
+        update_user = super().update(instance, validated_data)
+        update_user.set_password(validated_data['password'])
+        update_user.save()
+        return update_user
+
+class UserListSerializer(serializers.ListSerializer):
+    class Meta:
+        model = User
+
+    # Función para la representación de los datos, vos elegis que datos queres mostrar
     def to_representation(self, instance):
         return {
             'id': instance['id'],
@@ -15,3 +32,5 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name': instance['last_name'],
             'email': instance['email'],
         }
+
+
