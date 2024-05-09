@@ -61,8 +61,8 @@ class Indicator(BaseModel):
         return f'Oferta de la categoría {self.category_product}: {self.descount_value}%'
 
     class Meta:
-        verbose_name = ("Indicador de Oferta")
-        verbose_name_plural = ("Indicadores de Ofertas")
+        verbose_name = 'Indicador de Oferta'
+        verbose_name_plural = 'Indicadores de Ofertas'
 
 
 class Product(BaseModel):
@@ -78,3 +78,10 @@ class Product(BaseModel):
     @_history_user.setter
     def _history_user(self, value):
         self.changed_by = value
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
